@@ -1,0 +1,20 @@
+
+// Without CSS modules
+// const withLess = require('@zeit/next-less');
+// module.exports = withLess();
+
+// With CSS modules
+// const withLess = require('@zeit/next-less')
+// module.exports = withLess({
+//     cssModules: true
+// });
+
+// With CSS modules and options
+const withLess = require('@zeit/next-less')
+module.exports = withLess({
+    cssModules: true,
+    cssLoaderOptions: {
+        importLoaders: 1,
+        localIdentName: "[local]_[hash:base64:5]",
+    }
+});
