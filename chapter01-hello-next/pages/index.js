@@ -1,5 +1,7 @@
 /**
- * 唯一的特殊目录是pages目录
+ * 自动打包编译 (使用 webpack 和 babel)
+ * 热加载
+ * 以 ./pages作为服务端的渲染和索引
  * @returns {*}
  * @constructor
  */
