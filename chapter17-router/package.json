@@ -1,0 +1,19 @@
+{
+  "name": "chapter17-router",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "latest",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  }
+}
