@@ -1,5 +1,9 @@
 import Head from 'next/head'
 
+/**
+ * Head 是一个内置组件，用于将元素附加到页面的<head>
+ *
+ */
 export default () => (
     <div>
         <Head>
