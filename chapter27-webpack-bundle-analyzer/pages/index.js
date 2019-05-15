@@ -1,7 +1,12 @@
 import React from 'react'
 import Link from 'next/link'
 
-
+/**
+ * 延迟
+ * @param ms
+ * @param result
+ * @returns {Promise<any>}
+ */
 const timeout = (ms, result) => {
     return new Promise(resolve => setTimeout(() => resolve(result), ms));
 };
