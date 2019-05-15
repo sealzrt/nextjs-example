@@ -29,9 +29,11 @@ class MyMobxApp extends App {
          * App.getInitialProps(appContext)
          * 实际调用的是 Component.getInitialProps(ctx)
          * 源码: appContext.Component.getInitialProps(appContext.ctx)
+         * 源码链接: https://github.com/zeit/next.js/blob/master/packages/next-server/lib/utils.js#L32
          *
          * 返回值: 如果 Component 没有定义 getInitialProps, 则返回空对象, 如果返回的不是对象, 会报错
          * 如果组件(Component.getInitialProps(ctx)) 返回了 {name:'123'}, 则返回值最后包装成 {pageProps: {name:'123'}}
+         *
          */
 
         console.log('========== invoke App.getInitialProps(appContext), 等于 appContext.Component.getInitialProps(appContext.ctx)');
