@@ -53,7 +53,7 @@ export default class Index extends React.Component {
     }
 
     render() {
-        console.log('4. Page >>> render >> this.props', this.props);
+        console.log('5. Page >>> render >> this.props', this.props);
         return <Page title="Index Page" linkTo="/other"/>
     }
 }

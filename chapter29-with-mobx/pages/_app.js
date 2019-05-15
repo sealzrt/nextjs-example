@@ -29,7 +29,7 @@ class MyMobxApp extends App {
          * App.getInitialProps(appContext)
          * 实际调用的是 Component.getInitialProps(ctx)
          * 源码: appContext.Component.getInitialProps(appContext.ctx)
-         * 源码链接: https://github.com/zeit/next.js/blob/master/packages/next-server/lib/utils.js#L32
+         * 源码链接: https://github.com/zeit/next.js/blob/master/packages/next-server/lib/utils.js#L3
          *
          * 返回值: 如果 Component 没有定义 getInitialProps, 则返回空对象, 如果返回的不是对象, 会报错
          * 如果组件(Component.getInitialProps(ctx)) 返回了 {name:'123'}, 则返回值最后包装成 {pageProps: {name:'123'}}
@@ -48,16 +48,17 @@ class MyMobxApp extends App {
 
     /**
      * 服务端渲染的时候 (刷新的时候), 每次都执行
-     * 客户端路由/跳转的时候, 只会执行一次
+     * 客户端第一次加载的时候, 只会执行一次, 之后所有的客户端跳转 都不会执行
      * @param props
      */
     constructor(props) {
         super(props);
         const isServer = !process.browser;
         console.log('2. MyMobxApp >>> constructor 执行', `是否是服务端执行:${!process.browser}`);
+        console.log('2. MyMobxApp >>> this.props.initialMobxState', {...this.props.initialMobxState});
         this.mobxStore = isServer
             ? props.initialMobxState
-            : initializeStore(props.initialMobxState)
+            : initializeStore(props.initialMobxState);
         console.log('2. MyMobxApp >>> constructor >>> this.mobxStore', Object.keys(this.mobxStore));
     }
 
