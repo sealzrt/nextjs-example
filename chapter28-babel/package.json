@@ -1,0 +1,22 @@
+{
+	"name": "chapter28-babel",
+	"version": "1.0.0",
+	"main": "index.js",
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"description": "",
+	"scripts": {
+		"dev": "next",
+		"build": "next build",
+		"start": "next start"
+	},
+	"dependencies": {
+		"next": "latest",
+		"react": "^16.0.0",
+		"react-dom": "^16.0.0"
+	},
+	"devDependencies": {
+		"@babel/plugin-proposal-do-expressions": "7.2.0"
+	}
+}
