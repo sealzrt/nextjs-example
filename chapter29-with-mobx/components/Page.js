@@ -4,7 +4,7 @@ import {inject, observer} from 'mobx-react'
 import Clock from './Clock'
 
 @inject(({store}) => {
-    console.log('------------------------- inject store', Object.keys(store));
+    console.log('>>>>>>>>>>>>>>>>>>>>>>>>>> @inject(),  Component Page 注入store ', Object.keys(store));
     return {
         store,
     };
