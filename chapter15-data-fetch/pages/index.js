@@ -21,7 +21,6 @@ export default class Index extends React.Component {
          res - HTTP 返回对象 (只有服务器端有)
          jsonPageRes - 获取数据响应对象 (只有客户端有)
          err - 渲染过程中的任何错误
-
      */
     static async getInitialProps () {
         // eslint-disable-next-line no-undef
