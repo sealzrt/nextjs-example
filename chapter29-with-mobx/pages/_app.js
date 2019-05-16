@@ -3,6 +3,9 @@ import React from 'react'
 import {initializeStore} from '../store'
 import {Provider} from 'mobx-react'
 
+/**
+ * Next.js使用App组件初始化页面。您可以覆盖它并控制页面初始化
+ */
 class MyMobxApp extends App {
     /**
      * 输入网址或刷新来访问 请求的是服务器, getInitialProps 在服务端的生命周期里执行
