@@ -55,7 +55,7 @@ class MyMobxApp extends App {
         super(props);
         const isServer = !process.browser;
         console.log('2. MyMobxApp >>> constructor 执行', `是否是服务端执行:${!process.browser}`);
-        console.log('2. MyMobxApp >>> this.props.initialMobxState', {...this.props.initialMobxState});
+        console.log('2. MyMobxApp >>> constructor >>> this.props.initialMobxState', {...this.props.initialMobxState});
         this.mobxStore = isServer
             ? props.initialMobxState
             : initializeStore(props.initialMobxState);

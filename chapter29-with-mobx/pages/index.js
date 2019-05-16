@@ -8,7 +8,18 @@ export default class Index extends React.Component {
      * 在调用 React 原生的所有生命周期函数之前，Next.js 会调用 getInitialProps 来获取数据，
      * 然后把获得数据作为 props 来启动 React 组件的原生生命周期过程
      *
-     * 输入网址或刷新来访问 请求的是服务器, getInitialProps 在服务端的生命周期里执行
+     * !!! getInitialProps 只在一端执行, 要么服务端, 要么客户端
+     * getInitialProps()能够在服务的运行，也能够在client运行。
+     * 当页面第一次加载时，服务器收到请求，getInitialProps()会执行，
+     * getInitialProps()返回的数据，会序列化后添加到 `window.__NEXT_DATA__.props`上，
+     * 写入HTML源码里，类似于<script>window.__NEXT_DATA__={props:{xxx}}</script>。
+     * 这样服务端的getInitialProps()就实现了把数据传送给了客户端
+     *
+     * 当页面是用户通过超链接跳转过去，而不是用户输入网址或刷新来访问的，这时候是纯客户端的行为，没有HTTP请求发出去。
+     * 用户如果通过超链接跳转回这个页面，客户端的getInitialProps()开始起作用了，
+     * 它会自动读取HTML源码里 window.__NEXT_DATA__.props里的数据并作为React组件的props
+     *
+     * 输入网址或刷新来访问 请求的是服务器, getInitialProps 在服务端的生命周期里执行, 客户端就不会执行
      * 通过客户端跳转的时候, getInitialProps 在浏览器端的生命周期里执行
      *
      * Next.js 在做服务器端渲染的时候，页面对应的 React 组件的 getInitialProps 函数被调用，异步结果就是“脱水”数据的重要部分，
