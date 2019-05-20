@@ -8,9 +8,8 @@ export default class Index extends React.Component {
      * 在调用 React 原生的所有生命周期函数之前，Next.js 会调用 getInitialProps 来获取数据，
      * 然后把获得数据作为 props 来启动 React 组件的原生生命周期过程
      *
-     * !!! getInitialProps 只在一端执行, 要么服务端, 要么客户端
-     * getInitialProps()能够在服务的运行，也能够在client运行。
-     * 当页面第一次加载时，服务器收到请求，getInitialProps()会执行，
+     * !!! getInitialProps 要么在服务端执行, 要么在客户端执行, 只会在一端执行
+     * 当页面第一次加载时，服务器收到请求，getInitialProps()会在服务端执行，
      * getInitialProps()返回的数据，会序列化后添加到 `window.__NEXT_DATA__.props`上，
      * 写入HTML源码里，类似于<script>window.__NEXT_DATA__={props:{xxx}}</script>。
      * 这样服务端的getInitialProps()就实现了把数据传送给了客户端
@@ -59,12 +58,12 @@ export default class Index extends React.Component {
     constructor(props) {
         super(props);
 
-        console.log('4. Page >>> constructor >> this.props', this.props);
-        console.log(`4. Page >>> constructor >> 是否是服务端执行:${!process.browser}`);
+        console.log('4. Page Index >>> constructor >> this.props', this.props);
+        console.log(`4. Page Index >>> constructor >> 是否是服务端执行:${!process.browser}`);
     }
 
     render() {
-        console.log('5. Page >>> render >> this.props', this.props);
+        console.log('5. Page Index >>> render >> this.props', this.props);
         return <Page title="Index Page" linkTo="/other"/>
     }
 }

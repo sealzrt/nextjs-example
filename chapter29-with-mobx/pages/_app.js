@@ -63,6 +63,9 @@ class MyMobxApp extends App {
             ? props.initialMobxState
             : initializeStore(props.initialMobxState);
         console.log('2. MyMobxApp >>> constructor >>> this.mobxStore', Object.keys(this.mobxStore));
+        if (process.browser) {
+            window.props = this.props;
+        }
     }
 
     render() {
