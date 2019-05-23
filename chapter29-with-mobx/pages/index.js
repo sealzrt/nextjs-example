@@ -51,7 +51,7 @@ export default class Index extends React.Component {
 
         return {
             from: 'client',
-        };
+        }
 
     }
 
