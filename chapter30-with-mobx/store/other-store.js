@@ -13,12 +13,12 @@ class OtherStore {
     }
 
     @action init = ({price = 0}) => {
-        this.state.count = price;
+        this.state.price = price;
     };
 
     @action addPrice = async () => {
         await delay(3000);
-        this.state.count = this.state.count + 100;
+        this.state.price = this.state.price + 100;
     };
 
 }

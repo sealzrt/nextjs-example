@@ -5,8 +5,8 @@ import {inject, observer} from 'mobx-react';
 import * as indexService from '../service/index-service';
 
 @inject(({indexStore}, props) => {
-    console.log('Index >>> inject >>> indexStore', indexStore);
-    console.log('Index >>> inject >>> props', props);
+    console.log('Index >>> inject >>> indexStore.state', {...indexStore.state});
+    console.log('Index >>> inject >>> props.initData', props.initData);
 
     // 初始化
     indexStore.init(props.initData);
@@ -26,6 +26,16 @@ export default class Index extends React.Component {
         console.log(`Index.getInitialProps >>> 是否是服务端执行: ${isServer}`);
 
         const initData = await indexService.getInitData();
+
+        // const {req} = params;
+        // if (req) {
+        //     return {
+        //         from: 'other-server',
+        //     };
+        // }
+        // return {
+        //     from: 'other-client',
+        // };
 
         return {
             initData

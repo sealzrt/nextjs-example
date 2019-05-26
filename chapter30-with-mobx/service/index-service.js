@@ -7,7 +7,7 @@ const delay = (ms) => {
 };
 
 export const getInitData = async () => {
-    await delay(1000);
+    await delay(500);
     return {
         count: 10,
     };

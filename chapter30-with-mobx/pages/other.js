@@ -5,8 +5,8 @@ import {inject, observer} from 'mobx-react';
 import * as otherService from '../service/other-service';
 
 @inject(({otherStore}, props) => {
-    console.log('Index >>> inject >>> indexStore', otherStore);
-    console.log('Index >>> inject >>> props', props);
+    console.log('Other >>> inject >>> otherStore.state', {...otherStore.state});
+    console.log('Other >>> inject >>> props.initData', props.initData);
 
     // 初始化
     otherStore.init(props.initData);
