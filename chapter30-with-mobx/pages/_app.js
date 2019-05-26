@@ -33,7 +33,8 @@ class MobxApp extends App {
         super(props);
 
         this.allStore = initializeStore();
-        console.log(`MobxApp >>> constructor >>> this.allStore`, this.allStore);
+        console.log('MobxApp >>> constructor >>> this.props', this.props);
+        // console.log(`MobxApp >>> constructor >>> this.allStore`, this.allStore);
     }
 
     render() {

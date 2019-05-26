@@ -1,0 +1,19 @@
+{
+  "name": "chapter20-custom-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js"
+  },
+  "dependencies": {
+    "next": "latest",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  }
+}
