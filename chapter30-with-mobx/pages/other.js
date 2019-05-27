@@ -53,7 +53,7 @@ export default class Other extends React.Component {
           <button onClick={this.handleClick}>addCount</button>
         </div>
         <div>
-          <Link href="/index">
+          <Link href="/index?id=666">
             <a>跳转到首页</a>
           </Link>
         </div>

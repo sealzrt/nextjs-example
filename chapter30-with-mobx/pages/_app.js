@@ -26,10 +26,9 @@ class MobxApp extends App {
     const allStore = initializeStore();
 
     if (appContext.Component.getInitialProps) {
+      // 把所有的store 传递给 Page.getInitialProps, 方便页面初始化 `store` 里的数据
       await appContext.Component.getInitialProps(appContext.ctx, allStore);
     }
-
-    console.log('allStore.indexStore', {...allStore.indexStore.state});
 
     return {
       ...allStore,
@@ -39,11 +38,18 @@ class MobxApp extends App {
   constructor(props) {
     super(props);
 
-    const isServer = !process.browser ? '是' : '否';
-    console.log(`MobxApp >>> constructor >>> 是否是服务端执行`, isServer);
+    const isServer = !process.browser;
 
+    /**
+     * 如果是服务端执行, 则直接使用 MobxApp.getInitialProps() 执行后添加到props上的 stores, 比如: indexStore, otherStore
+     *
+     * 第一次加载的时候 MobxApp.constructor 在浏览器端只会执行一次, 然后客户端跳转 就不会执行了
+     * 如果是客户端执行, 则使用服务端脱水的数据, 初始化store
+     *    this.props.indexStore === window.__NEXT_DATA__.props.indexStore
+     *    this.props.otherStore === window.__NEXT_DATA__.props.otherStore
+     */
     this.indexStore = isServer ? props.indexStore : initIndexStore(this.props.indexStore);
-    this.otherStore = isServer ? props.otherStore : initIndexStore(this.props.otherStore);
+    this.otherStore = isServer ? props.otherStore : initOtherStore(this.props.otherStore);
   }
 
   render() {
@@ -53,6 +59,7 @@ class MobxApp extends App {
       indexStore: this.indexStore,
       otherStore: this.otherStore,
     };
+
     return (
       <Container>
         <Provider {...allStore}>

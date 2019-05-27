@@ -19,11 +19,7 @@ class IndexStore {
     count: 0,
   };
 
-  constructor(initStore = {
-    name: '我是首页',
-    desc: '首页描述',
-    count: 0,
-  }) {
+  constructor(initStore = {}) {
     this.state = {
       ...this.state,
       ...initStore.state,
@@ -35,12 +31,12 @@ class IndexStore {
   }
 
   @action init = async () => {
-    await delay(1000);
+    await delay(500);
     this.state.count = 10;
   };
 
   @action addCount = async () => {
-    await delay(1000);
+    await delay(500);
     this.state.count = this.state.count + 1;
   };
 
@@ -48,12 +44,17 @@ class IndexStore {
 
 export let indexStore = null;
 
-export default function initIndexStore(initData) {
+/**
+ * 初始化
+ * @param initData
+ * @returns {IndexStore}
+ */
+export default function initIndexStore(initStore) {
   if (isServer) {
     return new IndexStore();
   }
   if (indexStore === null) {
-    indexStore = new IndexStore(initData);
+    indexStore = new IndexStore(initStore);
   }
   return indexStore;
 }

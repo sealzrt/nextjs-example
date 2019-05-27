@@ -2,8 +2,6 @@ import React from 'react';
 import Link from "next/link";
 import {inject, observer} from 'mobx-react';
 
-import * as indexService from '../service/index-service';
-
 @inject(({indexStore}, props) => {
   console.log('Index >>> inject >>> indexStore.state', {...indexStore.state});
 
@@ -18,7 +16,14 @@ import * as indexService from '../service/index-service';
 @observer
 export default class Index extends React.Component {
 
-  static async getInitialProps({req, query, asPath}, {indexStore}) {
+  /**
+   * 第一个参数
+   * @param ctx 上下文
+   * @param 第二个对象, 包括了所有注册的store, 通过解构拿到 indexStore
+   * @returns {Promise<void>}
+   */
+  static async getInitialProps(ctx, {indexStore}) {
+    const {req, query, asPath} = ctx;
     const isServer = !process.browser ? '是' : '否';
     console.log(`Index.getInitialProps >>> 是否是服务端执行: ${isServer}`);
     console.log('Index.getInitialProps >>> query', query);
@@ -52,7 +57,7 @@ export default class Index extends React.Component {
           <button onClick={this.handleClick}>addCount</button>
         </div>
         <div>
-          <Link href="/other">
+          <Link href="/other?x=123&y=456">
             <a>跳转到其他页</a>
           </Link>
         </div>
