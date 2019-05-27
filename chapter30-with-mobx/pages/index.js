@@ -5,63 +5,61 @@ import {inject, observer} from 'mobx-react';
 import * as indexService from '../service/index-service';
 
 @inject(({indexStore}, props) => {
-    console.log('Index >>> inject >>> indexStore.state', {...indexStore.state});
-    console.log('Index >>> inject >>> props.initData', props.initData);
+  console.log('Index >>> inject >>> indexStore.state', {...indexStore.state});
+  console.log('Index >>> inject >>> props.initData', props.initData);
 
-    // 初始化
-    indexStore.init(props.initData);
+  // // 初始化
+  // indexStore.init(props.initData);
 
-    return {
-        // data
-        fullData: indexStore.fullData,
-        // func
-        init: indexStore.init,
-    };
+  return {
+    // data
+    fullData: indexStore.fullData,
+    // func
+    init: indexStore.init,
+    addCount: indexStore.addCount,
+  };
 })
 @observer
 export default class Index extends React.Component {
 
-    static async getInitialProps(params) {
-        const isServer = !process.browser ? '是' : '否';
-        console.log(`Index.getInitialProps >>> 是否是服务端执行: ${isServer}`);
+  static async getInitialProps(params) {
+    const isServer = !process.browser ? '是' : '否';
+    console.log(`Index.getInitialProps >>> 是否是服务端执行: ${isServer}`);
 
-        const initData = await indexService.getInitData();
+    const initData = await indexService.getInitData();
 
-        // const {req} = params;
-        // if (req) {
-        //     return {
-        //         from: 'other-server',
-        //     };
-        // }
-        // return {
-        //     from: 'other-client',
-        // };
+    return {
+      initData
+    };
+  }
 
-        return {
-            initData
-        };
-    }
+  constructor(props) {
+    super(props);
 
-    constructor(props) {
-        super(props);
+    console.log(`Index >>> constructor`);
+    console.log(`Index >>> constructor, this.props.fullData`, this.props.fullData);
+  }
 
-        console.log(`Index >>> constructor`);
-        console.log(`Index >>> constructor, this.props.fullData`, this.props.fullData);
-    }
+  handleClick = () => {
+    this.props.addCount();
+  };
 
-    render() {
-        const {fullData} = this.props;
-        console.log(`Index >>> render >>> fullData`, fullData);
-        return (
-            <div>
-                <div>我是首页</div>
-                <div>{fullData}</div>
-                <div>
-                    <Link href="/other">
-                        <a>跳转到其他页</a>
-                    </Link>
-                </div>
-            </div>
-        );
-    }
+  render() {
+    const {fullData} = this.props;
+    console.log(`Index >>> render >>> fullData`, fullData);
+    return (
+      <div>
+        <div>我是首页</div>
+        <div>{fullData}</div>
+        <div>
+          <button onClick={this.handleClick}>addCount</button>
+        </div>
+        <div>
+          <Link href="/other">
+            <a>跳转到其他页</a>
+          </Link>
+        </div>
+      </div>
+    );
+  }
 }

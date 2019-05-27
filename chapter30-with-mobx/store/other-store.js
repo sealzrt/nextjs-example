@@ -1,5 +1,13 @@
 import {observable, computed, action} from 'mobx';
 
+const delay = (ms) => {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve();
+        }, ms);
+    });
+};
+
 class OtherStore {
 
     @observable state = {
@@ -17,7 +25,7 @@ class OtherStore {
     };
 
     @action addPrice = async () => {
-        await delay(3000);
+        await delay(1000);
         this.state.price = this.state.price + 100;
     };
 
