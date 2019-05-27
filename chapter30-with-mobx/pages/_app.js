@@ -16,9 +16,6 @@ class MobxApp extends App {
    * 参数: appContext.ctx: 默认包含3个对象, 分别是: 'pathname', 'query', 'asPath'
    */
   static async getInitialProps(appContext) {
-    console.log('---------------------------------------------------------------------------------------------------------------');
-    console.log('---------------------------------------------------------------------------------------------------------------');
-    console.log('---------------------------------------------------------------------------------------------------------------');
     const isServer = !process.browser ? '是' : '否';
     console.log(`MobxApp.getInitialProps >>> 是否是服务端执行: ${isServer}`);
 
