@@ -6,13 +6,18 @@ const isServer = !process.browser;
  */
 useStaticRendering(isServer);
 
-import indexStore from './index-store';
-import otherStore from './other-store';
+import initIndexStore from './index-store';
+import initOtherStore from './other-store';
 
 
 export const initializeStore = () => {
-    return {
-        indexStore,
-        otherStore,
-    };
+  return {
+    indexStore: initIndexStore(),
+    otherStore: initOtherStore(),
+  };
+};
+
+export {
+  initIndexStore,
+  initOtherStore,
 };

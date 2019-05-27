@@ -1,34 +1,58 @@
 import {observable, computed, action} from 'mobx';
 
 const delay = (ms) => {
-    return new Promise(resolve => {
-        setTimeout(() => {
-            resolve();
-        }, ms);
-    });
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve();
+    }, ms);
+  });
 };
 
 class OtherStore {
 
-    @observable state = {
-        name: '我是其他',
-        desc: '其他描述',
-        price: 0,
-    };
+  @observable state = {
+    name: '我是其他',
+    desc: '其他描述',
+    price: 0,
+  };
 
-    @computed get fullData() {
-        return `name: ${this.state.name}, desc: ${this.state.desc}, price: ${this.state.price}`;
-    }
-
-    @action init = ({price = 0}) => {
-        this.state.price = price;
+  constructor(initStore = {
+    name: '我是其他',
+    desc: '其他描述',
+    price: 0,
+  }) {
+    this.state = {
+      ...this.state,
+      ...initStore.state,
     };
+  }
 
-    @action addPrice = async () => {
-        await delay(1000);
-        this.state.price = this.state.price + 100;
-    };
+  @computed get fullData() {
+    return `name: ${this.state.name}, desc: ${this.state.desc}, price: ${this.state.price}`;
+  }
+
+  @action init = async () => {
+    await delay(1000);
+    this.state.price = 100;
+  };
+
+  @action addPrice = async () => {
+    await delay(1000);
+    this.state.price = this.state.price + 100;
+  };
 
 }
 
-export default new OtherStore();
+export let otherStore = null;
+
+const isServer = !process.browser;
+
+export default function initOtherStore(initData) {
+  if (isServer) {
+    return new OtherStore();
+  }
+  if (otherStore === null) {
+    otherStore = new OtherStore(initData);
+  }
+  return otherStore;
+}

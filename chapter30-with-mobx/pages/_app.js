@@ -2,7 +2,7 @@ import React from 'react'
 import App, {Container} from 'next/app';
 import {Provider} from 'mobx-react'
 
-import {initializeStore} from '../store';
+import {initializeStore, initIndexStore, initOtherStore} from '../store';
 
 class MobxApp extends App {
 
@@ -22,31 +22,41 @@ class MobxApp extends App {
     const isServer = !process.browser ? '是' : '否';
     console.log(`MobxApp.getInitialProps >>> 是否是服务端执行: ${isServer}`);
 
-    let appProps = await App.getInitialProps(appContext);
+    // 初始化Store
+    const allStore = initializeStore();
+
+    if (appContext.Component.getInitialProps) {
+      await appContext.Component.getInitialProps(appContext.ctx, allStore);
+    }
+
+    console.log('allStore.indexStore', {...allStore.indexStore.state});
 
     return {
-      ...appProps,
+      ...allStore,
     };
   }
 
   constructor(props) {
     super(props);
 
-    this.allStore = initializeStore();
     const isServer = !process.browser ? '是' : '否';
     console.log(`MobxApp >>> constructor >>> 是否是服务端执行`, isServer);
-    console.log('MobxApp >>> constructor >>> this.props.pageProps', this.props.pageProps);
-    // console.log(`MobxApp >>> constructor >>> this.allStore`, this.allStore);
+
+    this.indexStore = isServer ? props.indexStore : initIndexStore(this.props.indexStore);
+    this.otherStore = isServer ? props.otherStore : initIndexStore(this.props.otherStore);
   }
 
   render() {
-    console.log(`MobxApp >>> render`);
-    const {Component, pageProps} = this.props;
+    const {Component} = this.props;
 
+    const allStore = {
+      indexStore: this.indexStore,
+      otherStore: this.otherStore,
+    };
     return (
       <Container>
-        <Provider {...this.allStore}>
-          <Component {...pageProps} />
+        <Provider {...allStore}>
+          <Component/>
         </Provider>
       </Container>
     )

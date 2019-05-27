@@ -6,10 +6,6 @@ import * as indexService from '../service/index-service';
 
 @inject(({indexStore}, props) => {
   console.log('Index >>> inject >>> indexStore.state', {...indexStore.state});
-  console.log('Index >>> inject >>> props.initData', props.initData);
-
-  // // 初始化
-  // indexStore.init(props.initData);
 
   return {
     // data
@@ -22,15 +18,16 @@ import * as indexService from '../service/index-service';
 @observer
 export default class Index extends React.Component {
 
-  static async getInitialProps(params) {
+  static async getInitialProps({req, query, asPath}, {indexStore}) {
     const isServer = !process.browser ? '是' : '否';
     console.log(`Index.getInitialProps >>> 是否是服务端执行: ${isServer}`);
+    console.log('Index.getInitialProps >>> query', query);
+    console.log('Index.getInitialProps >>> asPath', asPath);
 
-    const initData = await indexService.getInitData();
-
-    return {
-      initData
-    };
+    /**
+     * 从请求里拿 cookie, url参数 等数据, 初始化store
+     */
+    await indexStore.init();
   }
 
   constructor(props) {

@@ -3,13 +3,10 @@ import Link from 'next/link'
 import {inject, observer} from 'mobx-react';
 
 import * as otherService from '../service/other-service';
+import {otherStore} from "../store/other-store";
 
 @inject(({otherStore}, props) => {
   console.log('Other >>> inject >>> otherStore.state', {...otherStore.state});
-  console.log('Other >>> inject >>> props.initData', props.initData);
-
-  // // 初始化
-  // otherStore.init(props.initData);
 
   return {
     // data
@@ -22,15 +19,16 @@ import * as otherService from '../service/other-service';
 @observer
 export default class Other extends React.Component {
 
-  static async getInitialProps(params) {
+  static async getInitialProps({req, query, asPath}, {otherStore}) {
     const isServer = !process.browser ? '是' : '否';
     console.log(`Other.getInitialProps >>> 是否是服务端执行: ${isServer}`);
+    console.log('Other.getInitialProps >>> query', query);
+    console.log('Other.getInitialProps >>> asPath', asPath);
 
-    const initData = await otherService.getInitData();
-
-    return {
-      initData
-    };
+    /**
+     * 从请求里拿 cookie, url参数 等数据, 初始化store
+     */
+    await otherStore.init();
   }
 
   constructor(props) {
