@@ -12,11 +12,11 @@ app.prepare()
     .then(() => {
         const server = express()
 
-        server.get('/a', (req, res) => {
+        server.get('/a/:id', (req, res) => {
             return app.render(req, res, '/b', req.query)
         })
 
-        server.get('/b', (req, res) => {
+        server.get('/b/:id', (req, res) => {
             return app.render(req, res, '/a', req.query)
         })
 
