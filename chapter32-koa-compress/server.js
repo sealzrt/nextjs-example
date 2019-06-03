@@ -16,7 +16,7 @@ app.use(compress({
   filter: function (content_type) {
     return /text|javascript/i.test(content_type)
   },
-  threshold: 2048,
+  threshold: 100,
   flush: require('zlib').Z_SYNC_FLUSH
 }));
 

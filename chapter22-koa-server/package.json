@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "koa": "^2.0.1",
+    "koa-compress": "^3.0.0",
     "koa-router": "^7.1.0",
     "next": "latest",
     "react": "^16.0.0",
