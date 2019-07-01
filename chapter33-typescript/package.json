@@ -1,0 +1,28 @@
+{
+	"name": "chapter33-typescript",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"dev": "next",
+		"build": "next build",
+		"start": "next start",
+		"type-check": "tsc"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@zeit/next-typescript": "^1.1.1",
+		"next": "^8.1.0",
+		"react": "^16.8.6",
+		"react-dom": "^16.8.6"
+	},
+	"devDependencies": {
+		"@types/next": "^8.0.5",
+		"@types/node": "^12.0.10",
+		"@types/react": "^16.8.22",
+		"@types/react-dom": "^16.8.4",
+		"typescript": "^3.5.2"
+	}
+}
